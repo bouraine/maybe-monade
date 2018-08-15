@@ -1,11 +1,19 @@
 # maybe-monade
+
 Maybe monad implementation in Typescript
 
 # install packages
+
 npm install
 
-# test
+# test with jest
+
 npm run test
 
-# test watch
+# test with jest with watch option
+
 npm run test:watch
+
+## compile .ts files to .js into dist directory
+
+tsc
