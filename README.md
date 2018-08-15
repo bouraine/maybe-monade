@@ -1,2 +1,2 @@
 # maybe-monade
-Maybe monade implementation in Typescript
+Maybe monad implementation in Typescript
