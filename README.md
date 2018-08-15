@@ -2,15 +2,15 @@
 
 Maybe monad implementation in Typescript
 
-# install packages
+## install packages
 
 npm install
 
-# test with jest
+## test with jest
 
 npm run test
 
-# test with jest with watch option
+## test with jest with watch option
 
 npm run test:watch
 
