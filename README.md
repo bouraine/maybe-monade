@@ -6,11 +6,11 @@ Maybe monad implementation in Typescript
 
 npm install
 
-## test with jest
+## run jest tests
 
 npm run test
 
-## test with jest with watch option
+## run jst tests with watch option
 
 npm run test:watch
 
