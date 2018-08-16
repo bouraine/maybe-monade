@@ -16,5 +16,5 @@ Maybe monad implementation in Typescript
 
 ## build project
 
-`tsc`
+`tsc` or `npm run build`
 
