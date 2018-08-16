@@ -4,6 +4,7 @@
   "description": "Maybe monad implementation in Typescript",
   "main": "index.js",
   "scripts": {
+    "build":"tsc",
     "test": "jest",
     "test:watch": "jest --watch"
   },
