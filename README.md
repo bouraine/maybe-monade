@@ -10,11 +10,11 @@ Maybe monad implementation in Typescript
 
 `npm run test`
 
-## run jst tests with watch option
+## run jest tests with watch option
 
 `npm run test:watch`
 
-## compile .ts files to .js into dist directory
+## build project
 
 `tsc`
 
