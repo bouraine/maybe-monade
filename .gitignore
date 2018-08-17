@@ -59,12 +59,5 @@ typings/
 
 # next.js build output
 .next
-.idea/misc.xml
-.idea/modules.xml
-.idea/typescript-compiler.xml
-.idea/vcs.xml
-.idea/workspace.xml
-.idea/codeStyles/Project.xml
-.idea/codeStyles/codeStyleConfig.xml
-.idea/dictionaries/mbour.xml
-.idea/inspectionProfiles/Project_Default.xml
+.idea/
+dist/
