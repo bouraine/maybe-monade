@@ -1,10 +1,10 @@
 {
   "name": "maybe-monade",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Maybe monad implementation in Typescript",
   "main": "index.js",
   "scripts": {
-    "build":"tsc",
+    "build": "tsc",
     "test": "jest",
     "test:watch": "jest --watch"
   },
