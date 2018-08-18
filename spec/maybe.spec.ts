@@ -37,11 +37,11 @@ describe("Maybe monad", () => {
     const just2 = Maybe.fromValue(3.0);
     const add = (x: number) => x + 1;
     const just3 = just2.map(add);
-    const div4 = (x: number) => "" + x;
+    const div4 = (x: number) => "1" + x;
     const addToTab = (tab: number[]) => tab.map(x => x + 1);
     const justTab = Maybe.fromValue([1, 2, 3]);
     expect(just3.get()).toEqual(3.0 + 1);
-    expect(just2.map(div4).get()).toEqual("3");
+    expect(just2.map(div4).get()).toEqual("13");
     expect(justTab.map(addToTab).get()).toEqual([2, 3, 4]);
   });
 });
