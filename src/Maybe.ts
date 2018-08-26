@@ -3,7 +3,7 @@ export const Errors = {
 };
 
 /**
- * a wrapper (abstraction) for values that may or may not exist
+ * a wrapper (abstraction) for a value that may or may not exist
  */
 export default class Maybe<T> {
   /**
@@ -57,21 +57,23 @@ export default class Maybe<T> {
   }
 
   /**
-   * return the wrapped value if not empty, otherwise the provided default value.
+   * return the wrapped value if nonempty, otherwise the provided default value.
    */
   public getOrElse(defaultValue: T) {
     return this.value === null ? defaultValue : this.value;
   }
 
   /**
-   * return the value if not empty, otherwise invoke f and return the result of that invocation.
+   * return the value if nonempty, otherwise invoke alternative
+   * and return the result of that invocation.
+   * @param alternative the function to invoke
    */
   public orElse(alternative: () => Maybe<T>): Maybe<T> {
     return this.exists() ? Maybe.some(this.value) : alternative();
   }
 
   /**
-   * if a value exists, apply the provided mapping function to it,
+   * if ths value exists, apply the provided mapping function to it,
    * return an instance of Maybe wrapping the result.
    * @param fmap the function to apply
    */

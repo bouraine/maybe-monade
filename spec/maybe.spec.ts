@@ -44,4 +44,24 @@ describe("Maybe monad", () => {
     expect(just2.map(div4).get()).toEqual("13");
     expect(justTab.map(addToTab).get()).toEqual([2, 3, 4]);
   });
+
+  it("orelse", () => {
+    const getNumber = (): Maybe<number> => Maybe.none();
+    const num: Maybe<number> = getNumber().orElse(() => Maybe.fromValue(2));
+    expect(num).toEqual(Maybe.fromValue(2));
+  });
+
+  it("flatMap", () => {
+    const getMaybe = () => Maybe.fromValue(2);
+    const p: Maybe<number> = getMaybe().flatMap(() => Maybe.fromValue(2));
+    expect(p).toEqual(Maybe.fromValue(2));
+  });
+
+  it("should filter", () => {
+    const hello = Maybe.fromValue("hello");
+    const filtered = hello.filter(t => t === "hello");
+    expect(filtered).toEqual(Maybe.fromValue("hello"));
+    const none = hello.filter(t => t === "not hello");
+    expect(none).toEqual(Maybe.none());
+  });
 });
