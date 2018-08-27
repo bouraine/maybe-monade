@@ -5,7 +5,7 @@ Inspired from Haskell Maybe and Java Optional<T>
 
 > Maybe monad is an abstraction for values that may or may not exist
 
-> Maybe does not replace the exceptions macanisme but in most cases the use of Maybe to represent the non-existence of a value is more appropriate.
+> Maybe does not replace the exception macanism but in most cases the use of Maybe to represent the non-existence of a value is more appropriate.
 
 ## Installation
 
