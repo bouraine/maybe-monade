@@ -1,3 +1,5 @@
+import { IAppUser } from "./../src/Examples";
+import { getUserById, getUserToken } from "../src/Examples";
 import Maybe, { Errors } from "../src/Maybe";
 
 describe("Maybe monad", () => {
@@ -63,5 +65,33 @@ describe("Maybe monad", () => {
     expect(filtered).toEqual(Maybe.fromValue("hello"));
     const none = hello.filter(t => t === "not hello");
     expect(none).toEqual(Maybe.none());
+  });
+
+  it("example should work", () => {
+    const appuser: IAppUser = {
+      id: 1,
+      email: "bob@maybe.com",
+      token: "HAAZNEBD12",
+      expire: new Date(2020, 1, 1)
+    };
+    const isUserAuthenticated: boolean = getUserById(2)
+      .flatMap(getUserToken)
+      .map<boolean>(appuser => appuser.expire > new Date())
+      .do(x => console.log)
+      .getOrElse(false);
+
+    expect(isUserAuthenticated).toBeTruthy();
+
+    const defaultUser: IAppUser = { id: -1, email: "", token: "", expire: null };
+
+    const appUsers: IAppUser[] = [-2, -1, 0, 1].map(n => {
+      return getUserById(n)
+        .flatMap<IAppUser>(getUserToken)
+        .filter(appuser => appuser.expire > new Date())
+        .orElse(() => Maybe.fromValue(defaultUser))
+        .getOrElse(null);
+    });
+
+    expect(appUsers).toEqual([defaultUser, defaultUser, defaultUser, appuser]);
   });
 });

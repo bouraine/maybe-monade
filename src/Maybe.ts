@@ -91,11 +91,22 @@ export default class Maybe<T> {
   }
 
   /**
+   * apply f to the wrapped value then return an instance of Maybe wrapping
+   * the value before applying the f function.
+   * f could be console.log for example.
+   * @param f function to apply
+   */
+  public do(f: (value: T) => void): Maybe<T> {
+    f(this.value);
+    return Maybe.fromValue(this.value);
+  }
+
+  /**
    * if the wrapped value is nonempty, and the value matches the given predicate,
-   * return a Maybe wrapping the value, otherwise return an instance empty Maybe
+   * return a Maybe wrapping the value, otherwise return an instance of empty Maybe
    * @param predicate a predicate to apply to the value if nonempty
    */
-  public filter(predicate: (x: T) => boolean) {
+  public filter(predicate: (x: T) => boolean): Maybe<T> {
     return this.exists() && predicate(this.value) ? Maybe.some(this.value) : Maybe.none();
   }
 }
