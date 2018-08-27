@@ -5,7 +5,7 @@ export const Errors = {
 /**
  * A wrapper (abstraction) for a value that may or may not exist
  */
-export default class Maybe<T> {
+export class Maybe<T> {
   /**
    * Return an instance of Maybe wrapping an ampty value
    */
