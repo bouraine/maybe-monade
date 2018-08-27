@@ -1,2 +1,4 @@
 src/
 spec/
+output/
+.idea/
