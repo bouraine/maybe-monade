@@ -1,6 +1,6 @@
 {
   "name": "maybe-monade",
-  "version": "1.1.0",
+  "version": "1.1.2",
   "description": "Maybe monad implementation in Typescript",
   "main": "index.js",
   "scripts": {
@@ -15,7 +15,16 @@
   "keywords": [
     "Maybe",
     "Monad",
-    "Functional"
+    "Monade",
+    "Monada",
+    "Functional",
+    "Typescript",
+    "ts",
+    "js",
+    "Option",
+    "Optional",
+    "Some",
+    "None"
   ],
   "author": "bouraine",
   "license": "MIT",

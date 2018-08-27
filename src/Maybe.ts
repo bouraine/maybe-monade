@@ -3,7 +3,7 @@ export const Errors = {
 };
 
 /**
- * a wrapper (abstraction) for a value that may or may not exist
+ * A wrapper (abstraction) for a value that may or may not exist
  */
 export default class Maybe<T> {
   /**

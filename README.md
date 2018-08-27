@@ -1,9 +1,11 @@
 # maybe-monade
 
 Maybe monad implementation in Typescript.
-Inspired from haskel Maybe, Java Optional<T> and Scala Option
+Inspired from Haskell Maybe and Java Optional<T>
 
 > Maybe monad is an abstraction for values that may or may not exist
+
+> Maybe does not replace the exceptions macanisme but in most cases the use of Maybe to represent the non-existence of a value is more appropriate.
 
 ## Installation
 
@@ -44,11 +46,29 @@ const appUsers: IAppUser[] = [-2, -1, 0, 1].map(n => {
 expect(appUsers).toEqual([defaultUser, defaultUser, defaultUser, appuser]);
 ```
 
-### Example source
+### Maybe.some() and Maybe.none() as a function result
 
 ```
-import Maybe from "./Maybe";
+export const getUserById = (id: number): Maybe<IUser> => {
+  const user: IUser = { id, email: "bob@maybe.com" };
+  return id < 1 ? Maybe.none() : Maybe.some(user);
+};
 
+export const getUserToken = (user: IUser): Maybe<IAppUser> => {
+  const { id, email } = user;
+  const appuser: IAppUser = {
+    id,
+    email,
+    token: "HAAZNEBD12",
+    expire: new Date(2020, 1, 1)
+  };
+  return !email ? Maybe.none() : Maybe.some(appuser);
+};
+```
+
+### typings
+
+```
 export interface IUser {
   id: number;
   email: string;
@@ -60,22 +80,6 @@ export interface IAppUser extends IUser {
   token: string;
   expire: Date;
 }
-
-export const getUserById = (id: number): Maybe<IUser> => {
-  const user: IUser = { id, email: "bob@maybe.com" };
-  return id < 1 ? Maybe.none() : Maybe.fromValue(user);
-};
-
-export const getUserToken = (user: IUser): Maybe<IAppUser> => {
-  const { id, email } = user;
-  const appuser: IAppUser = {
-    id,
-    email,
-    token: "HAAZNEBD12",
-    expire: new Date(2020, 1, 1)
-  };
-  return !email ? Maybe.none() : Maybe.fromValue(appuser);
-};
 ```
 
 ## To clone and run the project
@@ -89,3 +93,15 @@ export const getUserToken = (user: IUser): Maybe<IAppUser> => {
 `npm run test:watch` tests with watch option
 
 `tsc` or `npm run build` to build project
+
+## Contributing to maybe-monade
+
+Feel free to submit issues, request features or contribute by sending a pull request.
+
+### Issues
+
+<https://github.com/bouraine/maybe-monade/issues>
+
+### Pull Requests
+
+<https://github.com/bouraine/maybe-monade/pulls>
