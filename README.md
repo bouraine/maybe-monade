@@ -11,6 +11,10 @@ Inspired from Haskell Maybe and Java Optional<T>
 
 `npm i --save maybe-monade`
 
+## Import >= 1.1.6
+
+`import {Maybe} from "maybe-monade/dist/Maybe";`
+
 ### Chaining functions (flatmap, map, do and getOrElse)
 
 ```
