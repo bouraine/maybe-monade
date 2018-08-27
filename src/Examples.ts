@@ -8,8 +8,8 @@ export interface IUser {
 export interface IAppUser extends IUser {
   id: number;
   email: string;
-  token?: string;
-  expire?: Date;
+  token: string;
+  expire: Date;
 }
 
 export const getUserById = (id: number): Maybe<IUser> => {
@@ -27,10 +27,3 @@ export const getUserToken = (user: IUser): Maybe<IAppUser> => {
   };
   return !email ? Maybe.none() : Maybe.fromValue(appuser);
 };
-
-// const main = () => {
-//   const isUserAuthenticated = getUserById(2)
-//     .flatMap(getUserToken)
-//     .filter(x => x.expire < new Date())
-//     .getOrElse(false);
-// };

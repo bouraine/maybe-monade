@@ -1,6 +1,6 @@
-import { IAppUser } from "./../src/Examples";
 import { getUserById, getUserToken } from "../src/Examples";
 import Maybe, { Errors } from "../src/Maybe";
+import { IAppUser } from "./../src/Examples";
 
 describe("Maybe monad", () => {
   it("should be empty", () => {
@@ -83,7 +83,6 @@ describe("Maybe monad", () => {
     expect(isUserAuthenticated).toBeTruthy();
 
     const defaultUser: IAppUser = { id: -1, email: "", token: "", expire: null };
-
     const appUsers: IAppUser[] = [-2, -1, 0, 1].map(n => {
       return getUserById(n)
         .flatMap<IAppUser>(getUserToken)
