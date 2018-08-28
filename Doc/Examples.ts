@@ -1,4 +1,4 @@
-import Maybe from "./Maybe";
+import {Maybe} from "../src";
 
 export interface IUser {
   id: number;
@@ -20,9 +20,9 @@ export const getUserById = (id: number): Maybe<IUser> => {
 export const getUserToken = (user: IUser): Maybe<IAppUser> => {
   const { id, email } = user;
   const appuser: IAppUser = {
-    id,
-    email,
-    token: "HAAZNEBD12",
+      id,
+      email,
+      token: "HAAZNEBD12",
     expire: new Date(2020, 1, 1)
   };
   return !email ? Maybe.none() : Maybe.some(appuser);

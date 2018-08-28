@@ -1,6 +1,6 @@
-import { getUserById, getUserToken } from "../src/Examples";
-import Maybe, { Errors } from "../src/Maybe";
-import { IAppUser } from "./../src/Examples";
+import { getUserById, getUserToken } from "../Doc/Examples";
+import { IAppUser } from "../Doc/Examples";
+import {Errors, Maybe} from "../src/Maybe";
 
 describe("Maybe monad", () => {
   it("should be empty", () => {

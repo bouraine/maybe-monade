@@ -7,7 +7,7 @@ export const Errors = {
  */
 export class Maybe<T> {
   /**
-   * Return an instance of Maybe wrapping an ampty value
+   * Return an instance of Maybe wrapping an empty value
    */
   public static none<T>() {
     return new Maybe<T>(null);
@@ -17,7 +17,7 @@ export class Maybe<T> {
    * return an instance of Maybe wrapping the provided value, otherwise return an instance of empty Maybe
    * @param value value to wrap into a Maybe
    */
-  public static fromValue<T>(value: T) {
+  public static fromValue<T>(value: T): Maybe<T> {
     return value ? Maybe.some(value) : Maybe.none<T>();
   }
 
@@ -26,7 +26,7 @@ export class Maybe<T> {
    * otherwise throw an error
    * @param value the value to wrap in an instance of Maybe
    */
-  public static some<T>(value: T) {
+  public static some<T>(value: T): Maybe<T> {
     if (!value) {
       throw Error(Errors.emptyValue);
     }
@@ -52,14 +52,14 @@ export class Maybe<T> {
   /**
    * get the wrapped value
    */
-  public get() {
+  public get(): T {
     return this.value;
   }
 
   /**
    * return the wrapped value if nonempty, otherwise the provided default value.
    */
-  public getOrElse(defaultValue: T) {
+  public getOrElse(defaultValue: T): T {
     return this.value === null ? defaultValue : this.value;
   }
 
