@@ -17,32 +17,26 @@ describe("Maybe functions", () => {
     });
     it("flatmap", () => {
         const value = Maybe.some(2).flatMap(x => Maybe.some(x).map(y => y + 1));
-        expect(value).toEqual(Maybe.some(Maybe.some(3)));
+        expect(value).toEqual(Maybe.some(3));
     });
     it("get", () => {
         const value = Maybe.some(2).get();
         expect(value).toEqual(2);
-        const value2 = Maybe.none().get();
-        expect(value2).toThrowError();
+        expect(() => Maybe.none().get()).toThrow();
     });
     it("do", () => {
-        const value = Maybe.some(2);
-        expect(value).toEqual(2);
-    });
-    it("flatmap", () => {
-        const value = Maybe.some(2);
-        expect(value).toEqual(2);
+        Maybe.some(2).do(console.log); // print 2
     });
     it("filter", () => {
-        const value = Maybe.some(2);
-        expect(value).toEqual(2);
+        const value = Maybe.some(2).filter(x => x % 3 === 0);
+        expect(value).toEqual(Maybe.none());
     });
     it("isEmpty", () => {
-        const value = Maybe.some(2);
-        expect(value).toEqual(2);
+        const value = Maybe.none();
+        expect(value.isEmpty()).toBeTruthy();
     });
     it("exists", () => {
         const value = Maybe.some(2);
-        expect(value).toEqual(2);
+        expect(value.exists()).toBeTruthy();
     });
 });

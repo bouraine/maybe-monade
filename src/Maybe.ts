@@ -1,11 +1,14 @@
 export const Errors = {
-    emptyValue: "Provided value must not be empty"
+    emptyValue: "Provided value must not be empty",
+    getEmptyValue: "You try to access an empty value"
 };
+
 
 /**
  * A wrapper (abstraction) for a value that may or may not exist
  */
 export class Maybe<T> {
+
     /**
      * Return an instance of Maybe wrapping an empty value
      */
@@ -27,13 +30,14 @@ export class Maybe<T> {
      * @param value the value to wrap in an instance of Maybe
      */
     public static some<T>(value: T): Maybe<T> {
-        if (!value) {
+        if (value === undefined || value === null) {
             throw Error(Errors.emptyValue);
         }
         return new Maybe(value);
     }
-
-    private constructor(private value: T | null) {
+    private readonly value: T;
+    private constructor(value: T | null) {
+        this.value = value;
     }
 
     /**
@@ -54,14 +58,18 @@ export class Maybe<T> {
      * get the wrapped value
      */
     public get(): T {
-        return this.value;
+        if (this.exists()) {
+            return this.value;
+        } else {
+            throw new Error(Errors.getEmptyValue);
+        }
     }
 
     /**
      * return the wrapped value if nonempty, otherwise the provided default value.
      */
     public getOrElse(defaultValue: T): T {
-        return this.value === null ? defaultValue : this.value;
+        return this.isEmpty() ? defaultValue : this.value;
     }
 
     /**
