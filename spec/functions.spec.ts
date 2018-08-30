@@ -6,6 +6,18 @@ describe("Maybe functions", () => {
         const value: number = getNothing().getOrElse(0);
         expect(value).toEqual(0);
     });
+    it("fromValue", () => {
+        const zero = Maybe.fromValue(0);
+        expect(zero).toEqual({value: 0}); // some maybe
+
+        const scoped = () => {
+            const undefined = 2;
+            expect(Maybe.fromValue(undefined)).toEqual({value: 2}); // maybe some
+        };
+
+        expect(Maybe.fromValue(undefined)).toEqual({value: null}); // none maybe
+        expect(Maybe.fromValue(null)).toEqual({value: null}); // none maybe
+    });
     it("orElse", () => {
         const getNothing = (): Maybe<number> => Maybe.none();
         const value: Maybe<number> = getNothing().orElse(() => Maybe.some(0));
