@@ -1,6 +1,7 @@
 import { getUserById, getUserToken } from "../Doc/Examples";
 import { IAppUser } from "../Doc/Examples";
-import {Errors, Maybe} from "../src/Maybe";
+import {Maybe} from "../src";
+import {ErrorMessages} from "../src/utils";
 
 describe("Maybe monad", () => {
   it("should be empty", () => {
@@ -28,11 +29,11 @@ describe("Maybe monad", () => {
   });
 
   it("should throw error", () => {
-    expect(() => Maybe.some(null)).toThrow(Errors.emptyValue);
+    expect(() => Maybe.some(null)).toThrow(ErrorMessages.emptyValue);
   });
 
   it("should throw an error", () => {
-    expect(() => Maybe.some(null)).toThrow(Errors.emptyValue);
+    expect(() => Maybe.some(null)).toThrow(ErrorMessages.emptyValue);
   });
 
   it("should add one", () => {

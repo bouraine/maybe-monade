@@ -1,9 +1,4 @@
-import {isNullOrUndefined} from "./utils";
-
-export const Errors = {
-    emptyValue: "Provided value must not be empty",
-    getEmptyValue: "You try to access an empty value"
-};
+import {ErrorMessages, isNullOrUndefined} from "./utils";
 
 /**
  * A wrapper (abstraction) for a value that may or may not exist
@@ -32,7 +27,7 @@ export class Maybe<T> {
      */
     public static some<T>(value: T): Maybe<T> {
         if (isNullOrUndefined(value)) {
-            throw Error(Errors.emptyValue);
+            throw Error(ErrorMessages.emptyValue);
         }
         return new Maybe(value);
     }
@@ -64,7 +59,7 @@ export class Maybe<T> {
         if (this.exists()) {
             return this.value;
         } else {
-            throw new Error(Errors.getEmptyValue);
+            throw new Error(ErrorMessages.getEmptyValue);
         }
     }
 

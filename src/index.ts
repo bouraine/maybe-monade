@@ -1,2 +1,1 @@
-export {Maybe} from "./Maybe";
-export {Errors} from "./Maybe";
+export {Maybe} from "./maybe";

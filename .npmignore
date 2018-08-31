@@ -3,3 +3,7 @@ doc/
 spec/
 output/
 .idea/
+*.package-lock.json
+.prettierrc.json
+docma.json
+tslint.json
