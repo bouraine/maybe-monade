@@ -48,7 +48,6 @@ export const getUserToken = (user: IUser): Maybe<IAppUser> => {
 };
 ```
 
-```
 ## To clone and run the project
 
 `git clone https://github.com/bouraine/maybe-monade.git`
