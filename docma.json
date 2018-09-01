@@ -1,4 +1,4 @@
 {
-  "src": ["./code/**/*.js", "./README.md"],
-  "dest": "./output/docs"
+  "src": ["./dist/**/*.js", "./README.md"],
+  "dest": "./doc/"
 }
