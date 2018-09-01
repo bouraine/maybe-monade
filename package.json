@@ -1,8 +1,8 @@
 {
   "name": "maybe-monade",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "description": "Maybe monad implementation in Typescript",
-  "main": "dist/index.js",
+  "main": "index.js",
   "scripts": {
     "build": "tsc",
     "test": "jest",
