@@ -10,7 +10,6 @@ Inspired from Haskell Maybe and Java Optional< T >
 > I recommend this excellent article to understand
 > [Functors, Applicatives, And Monads In Pictures](http://adit.io/posts/2013-04-17-functors,_applicatives,_and_monads_in_pictures.html)
 > or [his javascript translation](https://medium.com/@tzehsiang/javascript-functor-applicative-monads-in-pictures-b567c6415221)
-
 ## Installation
 
 `npm i --save maybe-monade`
