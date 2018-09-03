@@ -54,12 +54,9 @@ export const getUserToken = (user: IUser): Maybe<IAppUser> => {
   return !email ? Maybe.none() : Maybe.some(appuser);
 };
 ```
-
-### Maybe values
-
+### Functions
 **fromValue< T >(value: T): Maybe< T >**
-
-```
+``` 
 const zero = Maybe.fromValue<number>(0);
 expect(zero).toEqual({value: 0}); // some maybe
 
@@ -74,72 +71,56 @@ expect(Maybe.fromValue(undefined))
 
 expect(Maybe.fromValue(null))
 .toEqual({value: null}); // none maybe
-```
-
-**getOrElse(defaultValue: T): T**
-
+``` 
+**getOrElse(defaultValue: T): T** 
 ```
 const getNothing = (): Maybe<number> => Maybe.none();
 const value: number = getNothing().getOrElse(0);
 expect(value).toEqual(0);
 ```
-
 **orElse(alternative: () => Maybe< T >): Maybe< T >**
-
-```
+``` 
 const getNothing = (): Maybe<number> => Maybe.none();
 const value: Maybe<number> = getNothing().orElse(() => Maybe.some(0));
 expect(value).toEqual(Maybe.some(0)); //unsafe get
-```
-
+``` 
 **map< R >(fmap: (value: T) => R): Maybe< R >**
-
-```
+``` 
 const value = Maybe.some(2).map(x => x + 1);
 expect(value).toEqual(Maybe.some(3));
 ```
-
 **flatMap< R >(f: (value: T) => Maybe< R >): Maybe< R >**
-
-```
+``` 
 const value = Maybe.some(2).flatMap(x => Maybe.some(x).map(y => y + 1));
 expect(value).toEqual(Maybe.some(3));
 ```
-
 **get(): T**
-
-```
+``` 
 const value = Maybe.some(2).get();
 expect(value).toEqual(2);
 expect(() => Maybe.none().get()).toThrow();
-```
-
+``` 
 **do(f: (value: T) => void): Maybe< T >**
-
-```
+``` 
 Maybe.some(2).do(console.log); // print 2
-```
-
+``` 
 **filter(predicate: (x: T) => boolean): Maybe< T >**
-
-```
+``` 
 const value = Maybe.some(2).filter(x => x % 3 === 0);
 expect(value).toEqual(Maybe.none());
-```
-
+``` 
 **isEmpty()**
-
-```
+``` 
 const value = Maybe.none();
 expect(value.isEmpty()).toBeTruthy();
-```
-
+``` 
 **exists()**
-
-```
+``` 
 const value = Maybe.some(2);
 expect(value.exists()).toBeTruthy();
-```
+``` 
+
+
 
 ### Maybe callbacks
 
