@@ -35,6 +35,10 @@ export class Maybe<T> {
     return isNullOrUndefined(value) ? Maybe.none<T>() : Maybe.some(value);
   }
 
+  /**
+   * return an instance of Maybe wrapping the provided callback, otherwise return an instance of empty Maybe
+   * @param func callback to wrap into a Maybe
+   */
   public static fromFunction<R>(func: f<R>): MaybeCallback<R> {
     if (typeof func !== "function") {
       return MaybeCallback.none<R>();
@@ -71,23 +75,22 @@ export class Maybe<T> {
       throw new Error(ErrorMessages.getEmptyValue);
     }
   }
- }
 
- /**
-  * return the wrapped value if nonempty, otherwise the provided default value.
-  */
- public getOrElse(defaultValue: T): T {
-  return this.isEmpty() ? defaultValue : this.value;
- }
+  /**
+   * return the wrapped value if nonempty, otherwise the provided default value.
+   */
+  public getOrElse(defaultValue: T): T {
+    return this.isEmpty() ? defaultValue : this.value;
+  }
 
- /**
-  * return the value if nonempty, otherwise invoke alternative
-  * and return the result of that invocation.
-  * @param alternative the function to invoke
-  */
- public orElse(alternative: () => Maybe<T>): Maybe<T> {
-  return this.exists() ? Maybe.some(this.value) : alternative();
- }
+  /**
+   * return the value if nonempty, otherwise invoke alternative
+   * and return the result of that invocation.
+   * @param alternative the function to invoke
+   */
+  public orElse(alternative: () => Maybe<T>): Maybe<T> {
+    return this.exists() ? Maybe.some(this.value) : alternative();
+  }
 
   /**
    * if the value exists, apply the provided mapping function to it,
