@@ -20,7 +20,7 @@ export class MaybeCallback<T> {
    */
   public static some<R>(callback: f<R>): MaybeCallback<R> {
     if (typeof callback !== "function") {
-      throw new Error(ErrorMessages.emptyValue);
+      throw new Error(ErrorMessages.emptyCallback);
     }
     return new MaybeCallback(callback);
   }
