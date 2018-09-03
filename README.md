@@ -10,11 +10,13 @@ Inspired from Haskell Maybe and Java Optional< T >
 > I recommend this excellent article to understand
 > [Functors, Applicatives, And Monads In Pictures](http://adit.io/posts/2013-04-17-functors,_applicatives,_and_monads_in_pictures.html)
 > or [his javascript translation](https://medium.com/@tzehsiang/javascript-functor-applicative-monads-in-pictures-b567c6415221)
+
 ## Installation
 
 `npm i --save maybe-monade`
 
-## Import 
+## Import
+
 `import {Maybe} from "maybe-monade"`
 
 ## Import <= 1.1.6
@@ -22,6 +24,7 @@ Inspired from Haskell Maybe and Java Optional< T >
 `import {Maybe} from "maybe-monade/dist/Maybe"`
 
 ### Chaining functions (flatmap, map, do and getOrElse)
+
 ```
 const isUserAuthenticated: boolean = getUserById(2)
     .flatMap(getUserToken)
@@ -31,6 +34,7 @@ const isUserAuthenticated: boolean = getUserById(2)
 
 expect(isUserAuthenticated).toBeTruthy();
 ```
+
 ### Maybe.some() and Maybe.none() as a function result
 
 ```
@@ -50,9 +54,12 @@ export const getUserToken = (user: IUser): Maybe<IAppUser> => {
   return !email ? Maybe.none() : Maybe.some(appuser);
 };
 ```
-### Functions
+
+### Maybe values
+
 **fromValue< T >(value: T): Maybe< T >**
-``` 
+
+```
 const zero = Maybe.fromValue<number>(0);
 expect(zero).toEqual({value: 0}); // some maybe
 
@@ -67,54 +74,116 @@ expect(Maybe.fromValue(undefined))
 
 expect(Maybe.fromValue(null))
 .toEqual({value: null}); // none maybe
-``` 
-**getOrElse(defaultValue: T): T** 
+```
+
+**getOrElse(defaultValue: T): T**
+
 ```
 const getNothing = (): Maybe<number> => Maybe.none();
 const value: number = getNothing().getOrElse(0);
 expect(value).toEqual(0);
 ```
+
 **orElse(alternative: () => Maybe< T >): Maybe< T >**
-``` 
+
+```
 const getNothing = (): Maybe<number> => Maybe.none();
 const value: Maybe<number> = getNothing().orElse(() => Maybe.some(0));
 expect(value).toEqual(Maybe.some(0)); //unsafe get
-``` 
+```
+
 **map< R >(fmap: (value: T) => R): Maybe< R >**
-``` 
+
+```
 const value = Maybe.some(2).map(x => x + 1);
 expect(value).toEqual(Maybe.some(3));
 ```
+
 **flatMap< R >(f: (value: T) => Maybe< R >): Maybe< R >**
-``` 
+
+```
 const value = Maybe.some(2).flatMap(x => Maybe.some(x).map(y => y + 1));
 expect(value).toEqual(Maybe.some(3));
 ```
+
 **get(): T**
-``` 
+
+```
 const value = Maybe.some(2).get();
 expect(value).toEqual(2);
 expect(() => Maybe.none().get()).toThrow();
-``` 
+```
+
 **do(f: (value: T) => void): Maybe< T >**
-``` 
+
+```
 Maybe.some(2).do(console.log); // print 2
-``` 
+```
+
 **filter(predicate: (x: T) => boolean): Maybe< T >**
-``` 
+
+```
 const value = Maybe.some(2).filter(x => x % 3 === 0);
 expect(value).toEqual(Maybe.none());
-``` 
+```
+
 **isEmpty()**
-``` 
+
+```
 const value = Maybe.none();
 expect(value.isEmpty()).toBeTruthy();
-``` 
+```
+
 **exists()**
-``` 
+
+```
 const value = Maybe.some(2);
 expect(value.exists()).toBeTruthy();
-``` 
+```
+
+### Maybe callbacks
+
+**from throwable function**
+
+```
+const throws = (): number => {
+  throw new Error("error");
+};
+const wrapped = Maybe.fromFunction<number>(throws);
+const wrappedResult = wrapped.applySafe();
+expect(wrappedResult).toEqual({ value: null });
+```
+
+**from undefined function**
+
+```
+// callback which could be empty
+const callback: any = undefined;
+const wrappedCallback = Maybe.fromFunction<number>(callback);
+// executing undefined function returns None
+// instead of throwing "undefined is not a function" Error
+const result = wrappedCallback.apply();
+expect(result).toEqual({ value: null });
+```
+
+**from some function**
+
+```
+const div = (a: any, b: any) => a / b;
+const safeDiv = Maybe.fromFunction<number>(div);
+const just3 = safeDiv.apply(1, 2);
+expect(just3).toEqual({ value: 0.5 });
+```
+
+**from some function returning null**
+
+```
+const square = (a: number | null): number | null => (a ? a * a : null);
+const maybe_square = Maybe.fromFunction<number>(square);
+const maybe_result = maybe_square.apply(null);
+const mapped_result = maybe_result.map(x => x + 1).map(x => x + 2); // expected => {value: null}
+expect(mapped_result).toEqual(Maybe.none());
+```
 
 ## To clone and run the project
 
