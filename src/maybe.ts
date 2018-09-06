@@ -5,9 +5,6 @@ import { ErrorMessages, isNullOrUndefined } from "./utils";
  * A wrapper (abstraction) for a value that may or may not exist
  */
 export class Maybe<T> {
-  private readonly value: T;
-  private payload?: any;
-
   /**
    * Return an instance of Maybe wrapping an empty value
    */
@@ -46,10 +43,7 @@ export class Maybe<T> {
     return MaybeCallback.some<R>(func);
   }
 
-  private constructor(value: T | null, payload?: any) {
-    this.value = value;
-    this.payload = payload;
-  }
+  private constructor(private value: T | null) {}
 
   /**
    * return true if the wrapped value is empty, false otherwise
