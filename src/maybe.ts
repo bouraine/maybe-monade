@@ -33,8 +33,6 @@ export class Maybe<T> {
   return isNullOrUndefined(value) ? Maybe.none<T>() : Maybe.some(value);
  }
 
- private readonly value: T;
-
   /**
    * return an instance of Maybe wrapping the provided callback, otherwise return an instance of empty Maybe
    * @param func callback to wrap into a Maybe
