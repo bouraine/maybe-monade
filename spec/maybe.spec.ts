@@ -3,7 +3,7 @@ import { Maybe } from "../src";
 import { ErrorMessages } from "../src/utils";
 
 describe("Maybe monad", () => {
-  fit("from some function", () => {
+  it("from some function", () => {
     const div = (a: any, b: any) => a / b;
     const safeDiv = Maybe.fromFunction<number>(div);
     const just3 = safeDiv.apply(1, 2);

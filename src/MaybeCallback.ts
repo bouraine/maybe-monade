@@ -16,7 +16,7 @@ export class MaybeCallback<T> {
   /**
    * if the provided callback is not a function, return an instance of Maybe wrapping a nonempty value,
    * otherwise throw an error
-   * @param value the value to wrap in an instance of Maybe
+   * @param callback
    */
   public static some<R>(callback: f<R>): MaybeCallback<R> {
     if (typeof callback !== "function") {
@@ -28,6 +28,7 @@ export class MaybeCallback<T> {
   /**
    * return true if the wrapped value is empty, false otherwise
    */
+
   public isEmpty(): boolean {
     return this.callback === null;
   }
