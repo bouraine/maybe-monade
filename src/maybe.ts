@@ -1,4 +1,5 @@
-import {ErrorMessages, isNullOrUndefined} from "./utils";
+import { f, MaybeCallback } from "./MaybeCallback";
+import { ErrorMessages, isNullOrUndefined } from "./utils";
 
 /**
  * A wrapper (abstraction) for a value that may or may not exist
@@ -24,18 +25,27 @@ export class Maybe<T> {
   return new Maybe(value);
  }
 
+  /**
+   * return an instance of Maybe wrapping the provided value, otherwise return an instance of empty Maybe
+   * @param value value to wrap into a Maybe
+   */
+  public static fromValue<T>(value: T): Maybe<T> {
+    return isNullOrUndefined(value) ? Maybe.none<T>() : Maybe.some(value);
+  }
+
  /**
-  * return an instance of Maybe wrapping the provided value, otherwise return an instance of empty Maybe
-  * @param value value to wrap into a Maybe
-  */
- public static fromValue<T>(value: T): Maybe<T> {
-  return isNullOrUndefined(value) ? Maybe.none<T>() : Maybe.some(value);
- }
+   * return an instance of Maybe wrapping the provided callback, otherwise return an instance of empty Maybe
+   * @param func callback to wrap into a Maybe
+   */
+  public static fromFunction<R>(func: f<R>): MaybeCallback<R> {
+    if (typeof func !== "function") {
+      return MaybeCallback.none<R>();
+    }
+    return MaybeCallback.some<R>(func);
+  }
 
- private readonly value: T;
+  private constructor(privatevalue: T | null) {
 
- private constructor(value: T | null) {
-  this.value = value;
  }
 
  /**
@@ -91,20 +101,20 @@ export class Maybe<T> {
  /**
   * if the wrapped value is nonempty, apply the provided mapping function to it,
   * return that result, otherwise return an instance of empty Maybe.
-  * @param f the function to apply
+  * @param func the function to apply
   */
- public flatMap<R>(f: (value: T) => Maybe<R>): Maybe<R> {
-  return this.exists() ? f(this.value) : Maybe.none();
+ public flatMap<R>(func: (value: T) => Maybe<R>): Maybe<R> {
+  return this.exists() ? func(this.value) : Maybe.none();
  }
 
  /**
-  * apply f to the wrapped value then return an instance of Maybe wrapping
-  * the value before applying the f function.
-  * f could be console.log for example.
-  * @param f function to apply
+  * apply func to the wrapped value then return an instance of Maybe wrapping
+  * the value before applying the func function.
+  * func could be console.log for example.
+  * @param func function to apply
   */
- public do(f: (value: T) => void): Maybe<T> {
-  f(this.value);
+ public do(func: (value: T) => void): Maybe<T> {
+  func(this.value);
   return Maybe.fromValue(this.value);
  }
 

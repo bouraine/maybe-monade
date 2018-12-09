@@ -1,9 +1,42 @@
-import { getUserById, getUserToken } from "../Doc/Examples";
-import { IAppUser } from "../Doc/Examples";
-import {Maybe} from "../src";
-import {ErrorMessages} from "../src/utils";
+import { getUserById, getUserToken, IAppUser } from "../Doc/Examples";
+import { Maybe } from "../src";
+import { ErrorMessages } from "../src/utils";
 
 describe("Maybe monad", () => {
+  it("from some function", () => {
+    const div = (a: any, b: any) => a / b;
+    const safeDiv = Maybe.fromFunction<number>(div);
+    const just3 = safeDiv.apply(1, 2);
+    expect(just3).toEqual({ value: 0.5 });
+  });
+
+  it("from some function returning null", () => {
+    const square = (a: number | null): number | null => (a ? a * a : null);
+    const maybe_square = Maybe.fromFunction<number>(square);
+    const maybe_result = maybe_square.apply(null);
+    const mapped_result = maybe_result.map(x => x + 1).map(x => x + 2); // expected => {value: null}
+    expect(mapped_result).toEqual(Maybe.none());
+  });
+
+  it("from undefined function", () => {
+    // callback which could be empty
+    const callback: any = undefined;
+    const wrappedCallback = Maybe.fromFunction<number>(callback);
+    // executing undefined function returns None
+    // instead of throwing "undefined is not a function" Error
+    const result = wrappedCallback.apply();
+    expect(result).toEqual({ value: null });
+  });
+
+  it("from throwable function", () => {
+    const throws = (): number => {
+      throw new Error("error");
+    };
+    const wrapped = Maybe.fromFunction<number>(throws);
+    const wrappedResult = wrapped.applySafe();
+    expect(wrappedResult).toEqual({ value: null });
+  });
+
   it("should be empty", () => {
     const intNum = Maybe.fromValue<number>(null);
     const str = Maybe.fromValue<string>(null);
@@ -83,7 +116,12 @@ describe("Maybe monad", () => {
 
     expect(isUserAuthenticated).toBeTruthy();
 
-    const defaultUser: IAppUser = { id: -1, email: "", token: "", expire: null };
+    const defaultUser: IAppUser = {
+      id: -1,
+      email: "",
+      token: "",
+      expire: null
+    };
     const appUsers: IAppUser[] = [-2, -1, 0, 1].map(n => {
       return getUserById(n)
         .flatMap<IAppUser>(getUserToken)
