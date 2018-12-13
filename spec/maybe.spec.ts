@@ -87,6 +87,11 @@ describe("Maybe monad", () => {
     expect(num).toEqual(Maybe.fromValue(2));
   });
 
+  it("do", () => {
+    const getNumber = () => Maybe.fromValue(2);
+    expect(getNumber().do(null)).toEqual({value: null});
+  });
+
   it("flatMap", () => {
     const getMaybe = () => Maybe.fromValue(2);
     const p: Maybe<number> = getMaybe().flatMap(() => Maybe.fromValue(2));

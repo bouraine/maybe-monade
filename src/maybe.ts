@@ -111,7 +111,7 @@ export class Maybe<T> {
    * @param func function to apply
    */
   public do(func: (value: T) => void): Maybe<T> {
-    if (this.exists()) {
+    if (this.exists() && func) {
       func(this.value);
       return Maybe.fromValue(this.value);
     } else {
