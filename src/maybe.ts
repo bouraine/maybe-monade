@@ -13,7 +13,7 @@ export class Maybe<T> {
   }
 
   /**
-   * if the provided value is not falsy, return an instance of Maybe wrapping a nonempty value,
+   * if the provided value is not null or undefined, return an instance of Maybe wrapping a nonempty value,
    * otherwise throw an error
    * @param value the value to wrap in an instance of Maybe
    */
