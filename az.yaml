@@ -18,7 +18,7 @@ steps:
 
 - script: |
     npm pack
-    displayName: 'Package for npm release'
+  displayName: 'Package for npm release'
 
 - task: CopyFiles@2
   inputs:
