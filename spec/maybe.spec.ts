@@ -111,7 +111,7 @@ describe("Maybe monad", () => {
       id: 1,
       email: "bob@maybe.com",
       token: "HAAZNEBD12",
-      expire: new Date(2020, 1, 1)
+      expire: new Date(2050, 1, 1)
     };
     const isUserAuthenticated: boolean = getUserById(2)
       .flatMap(getUserToken)

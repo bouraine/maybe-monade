@@ -23,7 +23,7 @@ export const getUserToken = (user: IUser): Maybe<IAppUser> => {
         id,
         email,
         token: "HAAZNEBD12",
-        expire: new Date(2020, 1, 1)
+        expire: new Date(2050, 1, 1)
     };
     return !email ? Maybe.none() : Maybe.some(appuser);
 };
