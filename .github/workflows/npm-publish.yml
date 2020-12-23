@@ -21,14 +21,14 @@ jobs:
       - uses: Klemensas/action-autotag@stable
         id: update_tag
         with:
-          GITHUB_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+          GITHUB_TOKEN: "${{ secrets.GITHUBTOKEN }}"
           tag_prefix: "v"
       - name: Create Release
         if: steps.update_tag.outputs.tagname
         uses: actions/create-release@v1
         id: create_release
         env:
-          GITHUB_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+          GITHUB_TOKEN: "${{ secrets.NPM_AUTH_TOKEN }}"
         with:
           tag_name: ${{ steps.update_tag.outputs.tagname }}
           release_name: Release ${{ steps.update_tag.outputs.tagname }}
@@ -37,7 +37,7 @@ jobs:
         id: upload-release-asset
         uses: actions/upload-release-asset@v1
         env:
-          GITHUB_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+          GITHUB_TOKEN: "${{ secrets.NPM_AUTH_TOKEN }}"
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: ./package.tgz
