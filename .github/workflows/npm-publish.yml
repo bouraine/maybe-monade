@@ -28,7 +28,7 @@ jobs:
         uses: actions/create-release@v1
         id: create_release
         env:
-          GITHUB_TOKEN: "${{ secrets.NPM_AUTH_TOKEN }}"
+          GITHUB_TOKEN: "${{ secrets.GITHUBTOKEN }}"
         with:
           tag_name: ${{ steps.update_tag.outputs.tagname }}
           release_name: Release ${{ steps.update_tag.outputs.tagname }}
