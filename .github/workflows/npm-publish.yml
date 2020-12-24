@@ -41,7 +41,7 @@ jobs:
           GITHUB_TOKEN: "${{ secrets.GITHUBTOKEN }}"
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./package.tgz
+          asset_path: ./maybe-monade-1.4.3.tgz
           asset_name: package.tgz
           asset_content_type: application/tgz
 
