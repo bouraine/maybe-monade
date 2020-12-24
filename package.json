@@ -1,6 +1,6 @@
 {
   "name": "maybe-monade",
-  "version": "1.4.2",
+  "version": "1.4.3",
   "description": "Maybe monad implementation in Typescript",
   "main": "index.js",
   "scripts": {
